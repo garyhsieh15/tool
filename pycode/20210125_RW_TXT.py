@@ -13,8 +13,25 @@ FILE_NAME_W = "./file/TAP024_W.txt"
 # -------------------------------------------------------------------------------------
 def read_acc_history():
 
-    with open(FILE_NAME, 'r') as f:
-        ACC_HIS = f.readlines()
+    try:
+        ACC_HIS = []
+        with open(FILE_NAME, 'r') as f:
+            ACC_HIS = f.readlines()
+
+    except FileNotFoundError:
+        print(">>> couldn't find", FILE_NAME + '.')
+
+    except IsADirectoryError:
+        print(">>> ", FILE_NAME, "is a directory")
+
+    except:
+        print(">>> error !!, couldn't read", FILE_NAME + '.')
+
+    else:
+        print(">>> find", FILE_NAME + '.')
+
+    finally:
+        print("do no matter what")
 
     isSearched = False
     time = []
@@ -65,6 +82,8 @@ def write_acc_history():
         fw.write(text)
 
 if __name__ == "__main__":
-    #read_acc_history()
-    write_acc_history()
+    t, up, ns, ew = read_acc_history()
+    print("show time: ", t)
+
+    #write_acc_history()
 
