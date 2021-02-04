@@ -2,3 +2,5 @@ $ date    folder    file    class    function    description
 20210125  --  20210125_regex.py  --  find_name  給定name然後搜尋email
 20210126  --  20210125_RW_TXT.py  --  read_acc_history  可以讀取txt的文字檔
 20210126  --  20210125_RW_TXT.py  --  write_acc_history  可以寫入txt的文字檔
+20210205  20210204_OS_operation  20210204_os_dir.py  --   modify_file_name  修改檔案名稱
+20210205  20210205_math  20210205_matrix.py  --  calc_inverse  計算反矩陣
