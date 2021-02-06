@@ -35,6 +35,22 @@ def diff_basic_tri():
     print("show diff secx =  %20s" % ( diff_sec))
     print("show diff cscx =  %20s" % ( diff_csc))
 
+# -------------------------------------------------------------------------------------
+# name       : partial_diff()
+# description: partial differential for x*e ** (x*y)
+#
+#              diff(func(var), var)
+#
+# date       : 20210206
+# author     : garyhsieh
+# -------------------------------------------------------------------------------------
+def partial_diff():
+    x = symbols('x')
+    y = symbols('y')
+
+    partial_diff = diff(x * exp(x * y), x)
+    print("show partial diff x * e ** x*y = %s" % (partial_diff))
 
 if __name__ == "__main__":
-    diff_basic_tri()
+    #diff_basic_tri()
+    partial_diff()
