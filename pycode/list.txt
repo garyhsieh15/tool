@@ -4,3 +4,7 @@ $ date    folder    file    class    function    description
 20210126  --  20210125_RW_TXT.py  --  write_acc_history  可以寫入txt的文字檔
 20210205  20210204_OS_operation  20210204_os_dir.py  --   modify_file_name  修改檔案名稱
 20210205  20210205_math  20210205_matrix.py  --  calc_inverse  計算反矩陣
+20210214  package  -- -- --  呼叫package
+20210214  --  class_module.py  MyCalClass  --  呼叫module
+20210214  --  20210214_call_package_module.py  --  --  呼叫package與module
+20210214  --  20210214_class.py  --  --  使用class
