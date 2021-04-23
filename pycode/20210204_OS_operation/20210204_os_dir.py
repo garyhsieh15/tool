@@ -14,6 +14,7 @@ PATH = "./pic/"
 def modify_file_name(_path):
     
     xfiles = os.listdir(_path)
+    print("show xfiles: ", xfiles)
     i = 0
     for xfile_name in xfiles:
         ext = xfile_name.split('.')
