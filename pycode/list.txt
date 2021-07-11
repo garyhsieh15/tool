@@ -8,3 +8,4 @@ $ date    folder    file    class    function    description
 20210214  --  class_module.py  MyCalClass  --  呼叫module
 20210214  --  20210214_call_package_module.py  --  --  呼叫package與module
 20210214  --  20210214_class.py  --  --  使用class
+20210712  --  20210712_calc_run_time.py  --  calc_func_time  計算函數執行的時間.
