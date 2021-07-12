@@ -1,7 +1,7 @@
 #from package import class_package
 from package.class_package import MyCalClass
 
-#import class_module
+#from class_module import MyCalClass
 
 
 
