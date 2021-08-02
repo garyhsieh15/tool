@@ -5,21 +5,24 @@ FILE_NAME = "./file/TAP024.txt"
 FILE_NAME_W = "./file/TAP024_W.txt"
 
 """
-open(路徑+檔名,讀寫模式) 
-r:讀, w:新建(會覆蓋原有檔案),a追加,b二進位制檔案.
+open(路徑+檔名,讀寫模式, encoding = 'utf8(or utf_8)') 
+with open(路徑＋檔名, 操作模式, encoding = 'utf8(or utf_8)') as f:
 
 讀寫模式的型別有：
-rU 或 Ua 以讀方式開啟, 同時提供通用換行符支援 (PEP 278)
-w      以寫方式開啟，
-a      以追加模式開啟 (從 EOF 開始, 必要時建立新檔案)
+r      讀取(預設)．
+w      寫入(若檔案已存在，先將內容刪除，然後在寫入)．
+a      寫入(若檔案已存在，從最後方追加)．
+x      寫入(若該檔案已存在，送出例外FileExistsError通知)．
++      讀取與寫入(檔案同時操作讀取與寫入)．
 
-r      以讀模式開啟
-w      以寫模式開啟 (參見 w)
-a      以寫模式開啟 (參見 a)
+t      文字模式(預設，很少使用)．
+    tr     以文字模式讀取．
+    wr     以文字模式寫入．
 
-rb     以二進位制讀模式開啟
-wb     以二進位制寫模式開啟 (參見 w)
-ab     以二進位制追加模式開啟 (參見 a)
+b      二進位模式．
+    rb     以二進位讀模式開啟
+    wb     以二進位寫模式開啟 (參見 w)
+    ab     以二進位追加模式開啟 (參見 a)
 """
 
 # -------------------------------------------------------------------------------------
@@ -34,11 +37,12 @@ def read_acc_history(_fname):
 
     try:
         ACC_HIS = []
-        with open(_fname, 'r') as f:
+        with open(_fname, 'r', encoding = "utf8") as f:
             ACC_HIS = f.readlines()
+            #ACC_HIS = f.read()
 
     except FileNotFoundError:
-        print(">>> couldn't find", "\"" + _fname + "\".")
+        print(">>> couldn't find file !!", "\"" + _fname + "\".")
 
     except IsADirectoryError:
         print(">>> ", "\"" + _fname + "\"", "is a directory")
@@ -47,7 +51,7 @@ def read_acc_history(_fname):
         print(">>> error !!, couldn't read", "\"" + _fname + "\"" + '.')
 
     else:
-        print(">>> find", "\"" + _fname + '".')
+        print(">>> find file", "\"" + _fname + '".')
 
     finally:
         print("do no matter what")
@@ -57,6 +61,7 @@ def read_acc_history(_fname):
     up_acc = []
     NS_acc = []
     EW_acc = []
+    print("show all data: ", ACC_HIS)
     for line in ACC_HIS:
         line_list = line.split()
         #print("show line list: ", line_list) 
@@ -76,12 +81,7 @@ def read_acc_history(_fname):
             up_acc.append(line_list[1])
             NS_acc.append(line_list[2])
             EW_acc.append(line_list[3])
-    """ 
-    print("time: ", time)
-    print("up: ", up_acc)
-    print("NS: ", NS_acc)
-    print("EW: ", EW_acc)
-    """
+
     print("f.closed: ", f.closed)
 
     return time, up_acc, NS_acc, EW_acc
@@ -97,7 +97,7 @@ def write_acc_history(_fname):
     
     text = "89.995     4.299     5.574     0.049\n"
 
-    with open(_fname, 'a') as fw:
+    with open(_fname, 'a', encoding = "utf8") as fw:
         fw.write(text)
 
 if __name__ == "__main__":
