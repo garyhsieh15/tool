@@ -1,8 +1,12 @@
+import csv
 
 FILE_NAME = "./file/TAP024.txt"
 #FILE_NAME = "./file/TCU081.txt"
 
+FILE_NAME_CSV = "./file/data1.csv"
+
 FILE_NAME_W = "./file/TAP024_W.txt"
+FILE_NAME_W_CSV = "./file/data1_w.csv"
 
 """
 open(路徑+檔名,讀寫模式, encoding = 'utf8(or utf_8)') 
@@ -27,7 +31,7 @@ b      二進位模式．
 
 # -------------------------------------------------------------------------------------
 # name       : read_acc_history()
-# description: read history of acc data.
+# description: read history of acc data, the file formate is txt.
 #
 
 # date       : 20210126
@@ -88,7 +92,7 @@ def read_acc_history(_fname):
 
 # -------------------------------------------------------------------------------------
 # name       : write_acc_history()
-# description: write history of acc data.
+# description: write history of acc data, the file formate is txt.
 #
 # date       : 20210126
 # author     : garyhsieh
@@ -100,9 +104,65 @@ def write_acc_history(_fname):
     with open(_fname, 'a', encoding = "utf8") as fw:
         fw.write(text)
 
+# -------------------------------------------------------------------------------------
+# name       : read_data_csv_00()
+# description: read csv format'data via csv module.
+#
+# date       : 20210803
+# author     : garyhsieh
+# -------------------------------------------------------------------------------------
+def read_data_csv_00(_fname):
+    try:
+        DATA1 = []
+        with open(_fname, 'r', encoding = "utf8") as fr:
+            for k in csv.reader(fr):
+                DATA1.append(k)
+                #DATA1.extend(k)
+
+    except FileNotFoundError:
+        print(">>> couldn't find file !!", "\"" + _fname + "\".")
+
+    except IsADirectoryError:
+        print(">>> ", "\"" + _fname + "\"", "is a directory")
+
+    except:
+        print(">>> error !!, couldn't read", "\"" + _fname + "\"" + '.')
+
+    else:
+        print(">>> find file, path:", "\"" + _fname + '".')
+
+    finally:
+        print("do no matter what")
+
+    _time = []
+    _v = []
+    _h = []
+
+    t_idx = 0
+    v_idx = 1
+    h_idx = 2
+    for line in DATA1:
+        #print("show line value: ", line)
+        if line[t_idx] == "time":
+            continue
+
+        _time.append(line[t_idx])
+        _v.append(line[v_idx])
+        _h.append(line[h_idx])
+
+    print("show time: ", _time)
+    print("show v: ", _v)
+    print("show h: ", _h)
+
+    return _time, _v, _h
+
 if __name__ == "__main__":
+    """
     t, up, ns, ew = read_acc_history(FILE_NAME)
     print("show time: ", t)
+    """
+
+    time, v, h = read_data_csv_00(FILE_NAME_CSV)
 
     #write_acc_history(FILE_NAME_W)
 
