@@ -156,13 +156,54 @@ def read_data_csv_00(_fname):
 
     return _time, _v, _h
 
+# -------------------------------------------------------------------------------------
+# name       : write_data_csv_00()
+# description: write csv format'data via csv module.
+#
+# date       : 20210804
+# author     : garyhsieh
+# -------------------------------------------------------------------------------------
+def write_data_csv_00(_fname):
+
+    DATA1_W = []
+    DATA1_W.append(["time", "v", "h"])
+    DATA1_W.append(["0", "2", "4"])
+    DATA1_W.append(["0.5", "3.111", "6.123"])
+    DATA1_W.append(["1.0", "3.878", "9.432"])
+
+    try:
+        with open(_fname, 'w', newline = '', encoding = "utf8") as fw:
+            write_data = csv.writer(fw)
+            write_data.writerows(DATA1_W)
+
+    except FileNotFoundError:
+        print(">>> couldn't find file !!", "\"" + _fname + "\".")
+
+    except IsADirectoryError:
+        print(">>> ", "\"" + _fname + "\"", "is a directory")
+
+    except:
+        print(">>> error !!, couldn't write", "\"" + _fname + "\"" + '.')
+
+    else:
+        print(">>> file exist, path:", "\"" + _fname + '".')
+
+    finally:
+        print("do no matter what")
+
+    print("show fw: ", fw)
+    print("show DATA1_W: ", DATA1_W)
+
+
 if __name__ == "__main__":
     """
     t, up, ns, ew = read_acc_history(FILE_NAME)
     print("show time: ", t)
     """
 
-    time, v, h = read_data_csv_00(FILE_NAME_CSV)
+    #time, v, h = read_data_csv_00(FILE_NAME_CSV)
+    write_data_csv_00(FILE_NAME_W_CSV)
+    time, v, h = read_data_csv_00(FILE_NAME_W_CSV)
 
     #write_acc_history(FILE_NAME_W)
 
