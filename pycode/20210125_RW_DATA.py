@@ -5,10 +5,12 @@ FILE_NAME = "./file/TAP024.txt"
 #FILE_NAME = "./file/TCU081.txt"
 
 FILE_NAME_CSV = "./file/data1.csv"
+FILE_NAME_EXCEL = "./file/20210806_Tn.xlsx"
 
 FILE_NAME_W = "./file/TAP024_W.txt"
 FILE_NAME_W_CSV = "./file/data1_w.csv"
 FILE_NAME_W_TO_CSV = "./file/data2_w.csv"
+FILE_NAME_W_TO_EXCEL = "./file/data_w_excel.xlsx"
 
 """
 open(路徑+檔名,讀寫模式, encoding = 'utf8(or utf_8)') 
@@ -134,7 +136,7 @@ def read_data_csv_00(_fname):
         print(">>> find file, path:", "\"" + _fname + '".')
 
     finally:
-        print("do no matter what")
+        print(">>> do no matter what")
 
     _time = []
     _v = []
@@ -157,6 +159,44 @@ def read_data_csv_00(_fname):
     print("show h: ", _h)
 
     return _time, _v, _h
+
+# -------------------------------------------------------------------------------------
+# name       : write_data_csv_00()
+# description: write csv format'data via csv module.
+#
+# date       : 20210804
+# author     : garyhsieh
+# -------------------------------------------------------------------------------------
+def write_data_csv_00(_fname):
+
+    DATA1_W = []
+    DATA1_W.append(["time", "v", "h"])
+    DATA1_W.append(["0", "2", "4"])
+    DATA1_W.append(["0.5", "3.111", "6.123"])
+    DATA1_W.append(["1.0", "3.878", "9.432"])
+
+    try:
+        with open(_fname, 'w', newline = '', encoding = "utf8") as fw:
+            write_data = csv.writer(fw)
+            write_data.writerows(DATA1_W)
+
+    except FileNotFoundError:
+        print(">>> couldn't find file !!", "\"" + _fname + "\".")
+
+    except IsADirectoryError:
+        print(">>> ", "\"" + _fname + "\"", "is a directory")
+
+    except:
+        print(">>> error !!, couldn't write", "\"" + _fname + "\"" + '.')
+
+    else:
+        print(">>> file exist, path:", "\"" + _fname + '".')
+
+    finally:
+        print("do no matter what")
+
+    print("show fw: ", fw)
+    print("show DATA1_W: ", DATA1_W)
 
 # -------------------------------------------------------------------------------------
 # name       : rw_data_csv_01()
@@ -226,43 +266,142 @@ def rw_data_csv_01(_fname):
     return _data
 
 # -------------------------------------------------------------------------------------
-# name       : write_data_csv_00()
-# description: write csv format'data via csv module.
+# name       : read_data_excel(_fname)
+# description: read EXCEL format'data via pandas module.
 #
-# date       : 20210804
+# date       : 20210808
 # author     : garyhsieh
 # -------------------------------------------------------------------------------------
-def write_data_csv_00(_fname):
+def read_data_excel(_fname):
 
-    DATA1_W = []
-    DATA1_W.append(["time", "v", "h"])
-    DATA1_W.append(["0", "2", "4"])
-    DATA1_W.append(["0.5", "3.111", "6.123"])
-    DATA1_W.append(["1.0", "3.878", "9.432"])
+    # ---------------------------------------------------------------------------------
+    # parameter
+    # file path
+    # sheet_name: sheet page, if None means showing all sheet pages.
+    # usecols: 指定讀取的column行數, 例如["name_00", "name_01", ... ...]
+    #          表示讀column名為name_00, name_01的行內容， "A, B, ...E:H"，表示讀column
+    #          index為A, B, ...E到H行內容．
+    # 
+    # nrows: 指定讀取row的列數, 例如nrows = 2表示2列內容，nrows = 13表示13列內容．
+    # ---------------------------------------------------------------------------------
+    data = pd.read_excel(_fname, sheet_name = "Joint Displacements")
+    #data = pd.read_excel(_fname, sheet_name = "Joint Displacements", usecols = ["TABLE:  Joint Displacements"])
+    #data = pd.read_excel(_fname, sheet_name = "Joint Displacements", usecols = "A, C, E:F", nrows = 2)
+    #data = pd.read_excel(_fname, sheet_name = None)
+    _df = pd.DataFrame(data)
 
+    # 抓取所有的行標題有哪些．
+    columns = _df.columns
+    # 計算所有行標題的數目．
+    num_columns = len(columns)
+    # 抓取指定行標題，與指定列裡面的內容．
+    a00 = _df[columns[0]][0]
+    a01 = _df[columns[0]][1]
+
+    # 修改指定行標題，與指定列裡面的內容．
+    _df[columns[0]][1] = "TABLEs"
+    a01_m = _df[columns[0]][1]
+
+    # 抓取列的index值．
+    a00_idx = _df.index[0]
+    a01_idx = _df.index[1]
+    #print("show data:\n%s" % data)
+    print("show df:\n%s" % _df)
+    #print("show df[\"TABLE:  Joint Displacements\"][0]:\n%s" % df["TABLE:  Joint Displacements"][0])
+    #print("show df[0:1]:\n%s" % df[0:1])
+    # 讀取0與1的列內容．
+    #df00 = df[0:2]
+    #print("show df00:\n%s" % df00)
+
+    #print("show data type:\n%s" % type(data))
+    #print("show df type:\n%s" % type(df))
+
+    print("show columns:\n%s" % columns)
+    print("show num columns:\n%s" % num_columns)
+    print("show df[columns[0]][0]:\n%s" % a00)
+    print("show df[columns[0]][1]:\n%s" % a01)
+    print("show modify df[columns[0]][1]:\n%s" % a01_m)
+    print("show a00 idx:\n%s" % a00_idx)
+    print("show a01 idx:\n%s" % a01_idx)
+    print("show df.head(2):\n%s" % _df.head(2))
+    print("show df.tail(4):\n%s" % _df.tail(4))
+
+    return _df
+
+# -------------------------------------------------------------------------------------
+# name       : write_data_excel(_fname, _df)
+# description: write EXCEL format'data via pandas module.
+#
+# date       : 20210808
+# author     : garyhsieh
+# -------------------------------------------------------------------------------------
+def write_data_excel(_fname, _df):
+
+    # ---------------------------------------------------------------------------------
+    # mode: 'w'表示重新寫檔案，不接續寫檔案．'a'表示接續寫檔案．
+    # ---------------------------------------------------------------------------------
+
+    # ---------------------------------------------------------------------------------
+    # excel_writer: 檔案路徑．
+    # sheet_name: 設定sheet的名稱．
+    # na_rep: 設定NaN缺失值．
+    # columns[]: 指定要儲存的行資料．
+    # index: 設定index是否要顯示，True為顯示，False為不顯示．
+    # header: 設定行的標題是否要顯示或是重新給定標題，True為顯示，False為不顯示．["topic name"]重新給定標題．
+    # index_label: 設定index的標題．
+    # startrow: 從第幾列開始儲存資料．
+    # startcol: 從第幾行開始儲存資料．
+    # freeze_panes = (a, b): 讓a列與b行在滑鼠滾動中固定．
+    # ---------------------------------------------------------------------------------
+    with pd.ExcelWriter(_fname, mode = 'w') as writer:
+        # 可以在這裡面重複執行df.to_excel()，即可以一次儲存多個sheet page．
+        _df.to_excel(excel_writer = writer, sheet_name = "JDisplacements", na_rep = 11, columns = ["R3_idx"], \
+        #_df.to_excel(excel_writer = writer, sheet_name = "NEW_JD", na_rep = 11, columns = ["R3_idx"], \
+        index = True, header = True, index_label = "garyhsieh", startrow = 0, startcol = 0, float_format = "%.3f", \
+        freeze_panes = (1, 1))
+
+# -------------------------------------------------------------------------------------
+# name       : append_data_excel(_fname, _df)
+# description: append EXCEL format'data via pandas module.
+#
+# date       : 20210808
+# author     : garyhsieh
+# -------------------------------------------------------------------------------------
+def append_data_excel(_fname, _sheet_name, _df):
+    
+    # ---------------------------------------------------------------------------------
+    # mode: 'w'表示重新寫檔案，不接續寫檔案．'a'表示接續寫檔案．
+    # ---------------------------------------------------------------------------------
+    with pd.ExcelWriter(_fname, mode = 'a') as writer:
+        sheet = writer.book
+        if _sheet_name in sheet:
+            sheet.remove(sheet[_sheet_name])
+
+        # 可以在這裡面重複執行df.to_excel()，即可以一次儲存多個sheet page．
+        _df.to_excel(excel_writer = writer, sheet_name = _sheet_name, na_rep = "garyhsieh", columns = ["R3_idx"], \
+                index = True, header = True, index_label = "append", startrow = 1, startcol = 1)
+
+    """
     try:
-        with open(_fname, 'w', newline = '', encoding = "utf8") as fw:
-            write_data = csv.writer(fw)
-            write_data.writerows(DATA1_W)
+        with pd.ExcelWriter(_fname, mode = 'a') as writer:
+            sheet = writer.book
+            sheet.remove(sheet[_sheet_name])
+            # 可以在這裡面重複執行df.to_excel()，即可以一次儲存多個sheet page．
+            _df.to_excel(excel_writer = writer, sheet_name = _sheet_name, na_rep = "garyhsieh", columns = ["R3_idx"], \
+                    index = True, header = True, index_label = "append", startrow = 1, startcol = 1)   
 
-    except FileNotFoundError:
-        print(">>> couldn't find file !!", "\"" + _fname + "\".")
-
-    except IsADirectoryError:
-        print(">>> ", "\"" + _fname + "\"", "is a directory")
+    except Exception as e:
+        print(">>> Error message: %s" % e)
 
     except:
-        print(">>> error !!, couldn't write", "\"" + _fname + "\"" + '.')
+        print(">>> occur unknow Error!!")
 
     else:
-        print(">>> file exist, path:", "\"" + _fname + '".')
+        print(">>> find work sheet")
 
     finally:
-        print("do no matter what")
-
-    print("show fw: ", fw)
-    print("show DATA1_W: ", DATA1_W)
-
+        print(">>> do no matter what!!")
+    """
 
 if __name__ == "__main__":
     """
@@ -276,4 +415,7 @@ if __name__ == "__main__":
     #time, v, h = read_data_csv_00(FILE_NAME_W_CSV)
 
 
-    rw_data_csv_01(FILE_NAME_CSV)
+    #rw_data_csv_01(FILE_NAME_CSV)
+    df = read_data_excel(FILE_NAME_EXCEL)
+    #write_data_excel(FILE_NAME_W_TO_EXCEL, df)
+    append_data_excel(FILE_NAME_W_TO_EXCEL, "NEW_SHEET", df)

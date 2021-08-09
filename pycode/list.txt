@@ -13,3 +13,6 @@ $ date    folder    file    class    function    description
 20210803  --  20210125_RW_DATA.py  --  read_data_csv_00()  可以讀取csv的文字檔，採用csv.reader()函式．
 20210804  --  20210125_RW_DATA.py  --  write_data_csv_00()  可以寫入文字到csv檔，採用csv.writer()函式．
 20210807  --  20210125_RW_DATA.py  --  rw_data_csv_01()  可以寫入文字到csv檔，採用read_csv(), to_csv() pandas module。
+20210808  --  20210125_RW_DATA.py  --  read_data_excel(_fname)  可以讀入.xlsx檔，採用read_excel()。
+20210808  --  20210125_RW_DATA.py  --  write_data_excel(_fname, _df)  可以寫新的sheet page到.xlsx檔，採用to_excel()，mode = 'w'。
+20210808  --  20210125_RW_DATA.py  --  append_data_excel(_fname, _sheet_name, _df)  可以加入新的sheet page到.xlsx檔，採用to_excel()，mode = 'a'。
