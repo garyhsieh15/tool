@@ -1,6 +1,8 @@
 import csv
 import pandas as pd
 
+from package import edit_excel_pandas as eep
+
 FILE_NAME = "./file/TAP024.txt"
 #FILE_NAME = "./file/TCU081.txt"
 
@@ -269,6 +271,16 @@ def rw_data_csv_01(_fname):
 # name       : read_data_excel(_fname)
 # description: read EXCEL format'data via pandas module.
 #
+#              df = pandas.DataFrame(字典或陣列資料)
+#              dic   -> df = {key: values,
+#                           key: valuse,
+#                           ...}
+#
+#              array -> df = [[key, values],
+#                             [key, values],
+#                             ...
+#                             [key, values]]
+#
 # date       : 20210808
 # author     : garyhsieh
 # -------------------------------------------------------------------------------------
@@ -289,42 +301,68 @@ def read_data_excel(_fname):
     #data = pd.read_excel(_fname, sheet_name = "Joint Displacements", usecols = "A, C, E:F", nrows = 2)
     #data = pd.read_excel(_fname, sheet_name = None)
     _df = pd.DataFrame(data)
+    #print("show initial df:\n%s" % _df)
 
-    # 抓取所有的行標題有哪些．
-    columns = _df.columns
-    # 計算所有行標題的數目．
+    # 1. 抓取所有的行標題有哪些．
+
+    # 2. 計算所有行標題的數目．
+    """
     num_columns = len(columns)
-    # 抓取指定行標題，與指定列裡面的內容．
+    print("show num columns: %d" % num_columns)
+    """
+
+    # 3. 抓取指定行標題，與指定列裡面的內容．
+    """
     a00 = _df[columns[0]][0]
     a01 = _df[columns[0]][1]
+    print("show _df[columns[0]][0]: %s" % _df[columns[0]][0])
+    print("show _df[columns[0]][1]: %s" % _df[columns[0]][1])
+    print("show len(_df[columns[0]]): %d" % len(_df[columns[0]]))
+    """
 
-    # 修改指定行標題，與指定列裡面的內容．
+    # 4. 修改指定行標題，與指定列裡面的內容．
+    """
     _df[columns[0]][1] = "TABLEs"
     a01_m = _df[columns[0]][1]
+    print("show a01_m: %s" % a01_m)
+    """
 
-    # 抓取列的index值．
+    # 5. 抓取列的index值與index的長度．
+    """
     a00_idx = _df.index[0]
     a01_idx = _df.index[1]
-    #print("show data:\n%s" % data)
-    print("show df:\n%s" % _df)
-    #print("show df[\"TABLE:  Joint Displacements\"][0]:\n%s" % df["TABLE:  Joint Displacements"][0])
-    #print("show df[0:1]:\n%s" % df[0:1])
-    # 讀取0與1的列內容．
-    #df00 = df[0:2]
-    #print("show df00:\n%s" % df00)
+    print("show a00_idx, a01_idx:%s, %s" % (a00_idx, a01_idx))
+    print("show len _df.index:%s" % len(_df.index))
+    """
+
+    # 6. 顯示頭尾的資料．
+    """
+    _df_head = _df.head(2)
+    _df_tail = _df.tail(4)
+    print("show df.head(2):\n%s" % _df_head)
+    print("show df.tail(4):\n%s" % _df_tail)
+    """
+
+    # 7. 讀取指定列的資料並且抓取列裡面的cell值．
+    """
+    row_df_00 = _df[0:3]
+    print("show df[0:3]:\n%s" % row_df_00)
+    row_df_01 = _df[2:3]
+    print("show df[2:3]:\n%s" % row_df_01)
+
+    row_df_01_idx = row_df_01.index[0]
+    row_df_01_col = row_df_01.columns
+    for col in row_df_01_col:
+        print("show row'col: %30s, row'cell: %14s" % (col, row_df_01[col][row_df_01_idx]))
+    """
+
+    # 8. continue
+    
+
+    print("show last df:\n%s" % _df)
 
     #print("show data type:\n%s" % type(data))
     #print("show df type:\n%s" % type(df))
-
-    print("show columns:\n%s" % columns)
-    print("show num columns:\n%s" % num_columns)
-    print("show df[columns[0]][0]:\n%s" % a00)
-    print("show df[columns[0]][1]:\n%s" % a01)
-    print("show modify df[columns[0]][1]:\n%s" % a01_m)
-    print("show a00 idx:\n%s" % a00_idx)
-    print("show a01 idx:\n%s" % a01_idx)
-    print("show df.head(2):\n%s" % _df.head(2))
-    print("show df.tail(4):\n%s" % _df.tail(4))
 
     return _df
 
@@ -417,5 +455,10 @@ if __name__ == "__main__":
 
     #rw_data_csv_01(FILE_NAME_CSV)
     df = read_data_excel(FILE_NAME_EXCEL)
+    
+    df_PP = eep.ExcelPandasOP(df)
+    # 1. 抓取所有的行標題有哪些．
+    df_PP.get_col_header()
+
     #write_data_excel(FILE_NAME_W_TO_EXCEL, df)
-    append_data_excel(FILE_NAME_W_TO_EXCEL, "NEW_SHEET", df)
+    #append_data_excel(FILE_NAME_W_TO_EXCEL, "NEW_SHEET", df)
