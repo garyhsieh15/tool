@@ -1,7 +1,9 @@
 import csv
 import pandas as pd
+import os
 
 from package import edit_excel_pandas as eep
+
 
 FILE_NAME = "./file/TAP024.txt"
 #FILE_NAME = "./file/TCU081.txt"
@@ -302,23 +304,12 @@ def read_data_excel(_fname):
     #data = pd.read_excel(_fname, sheet_name = None)
     _df = pd.DataFrame(data)
     #print("show initial df:\n%s" % _df)
-
+    
     # 1. 抓取所有的行標題有哪些．
 
     # 2. 計算所有行標題的數目．
-    """
-    num_columns = len(columns)
-    print("show num columns: %d" % num_columns)
-    """
 
     # 3. 抓取指定行標題，與指定列裡面的內容．
-    """
-    a00 = _df[columns[0]][0]
-    a01 = _df[columns[0]][1]
-    print("show _df[columns[0]][0]: %s" % _df[columns[0]][0])
-    print("show _df[columns[0]][1]: %s" % _df[columns[0]][1])
-    print("show len(_df[columns[0]]): %d" % len(_df[columns[0]]))
-    """
 
     # 4. 修改指定行標題，與指定列裡面的內容．
     """
@@ -442,6 +433,8 @@ def append_data_excel(_fname, _sheet_name, _df):
     """
 
 if __name__ == "__main__":
+    path = os.getcwd()
+    print(">>> show path: %s" % path)
     """
     t, up, ns, ew = read_acc_history(FILE_NAME)
     print("show time: ", t)
@@ -458,7 +451,13 @@ if __name__ == "__main__":
     
     df_PP = eep.ExcelPandasOP(df)
     # 1. 抓取所有的行標題有哪些．
-    df_PP.get_col_header()
+    #df_PP.get_col_header()
+
+    # 2. 計算所有行標題的數目．
+    #df_PP.get_col_nums()
+    
+    # 3. 抓取指定行標題，與指定列裡面的內容．
+    df_PP.get_col_row_data(0, 1)
 
     #write_data_excel(FILE_NAME_W_TO_EXCEL, df)
     #append_data_excel(FILE_NAME_W_TO_EXCEL, "NEW_SHEET", df)

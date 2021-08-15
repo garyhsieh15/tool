@@ -1,14 +1,17 @@
 
 
 class MyCalClass:
+    # member variable(attribute)
     class_var = 11
+
+    # member function(method)
     # mark testing
     def __init__(self, x1, y1):
         self.x = x1
         self.y = y1
 
     def calc_add1(self, a, b):
-        self.__calc_add1()
+        self.__calc_add1_private()
         return a + b
 
     def calc_add2(self):
@@ -22,8 +25,9 @@ class MyCalClass:
         print("a value:", a)
         print("self.y value:", self.y)
 
-    def __calc_add1(self):
-        print("__calc_add1")
+    # private
+    def __calc_add1_private(self):
+        print("__calc_add1_private")
 
 def show_me_the_money():
     print("enter show me the money")
