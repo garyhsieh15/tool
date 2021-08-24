@@ -44,13 +44,15 @@ def diff_basic_tri():
 # date       : 20210206
 # author     : garyhsieh
 # -------------------------------------------------------------------------------------
-def partial_diff():
-    x = symbols('x')
-    y = symbols('y')
-
-    partial_diff = diff(x * exp(x * y), x)
-    print("show partial diff x * e ** x*y = %s" % (partial_diff))
+def partial_diff(_func, _x):
+    partial_diff = diff(_func, _x)
+    print("show partial diff( x * e ** x*y ) = %s" % (partial_diff))
 
 if __name__ == "__main__":
-    #diff_basic_tri()
-    partial_diff()
+    x = symbols('x')
+    y = symbols('y')
+    
+    # define function
+    func = x * exp(x * y)
+    partial_diff(func, x)
+
