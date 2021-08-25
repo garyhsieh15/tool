@@ -48,11 +48,13 @@ def partial_diff(_func, _x):
     partial_diff = diff(_func, _x)
     print("show partial diff( x * e ** x*y ) = %s" % (partial_diff))
 
+
 if __name__ == "__main__":
     x = symbols('x')
     y = symbols('y')
     
     # define function
-    func = x * exp(x * y)
-    partial_diff(func, x)
+    func_00 = x * exp(x * y)
+    func_01 = exp(x)
+    #partial_diff(func, x)
 
