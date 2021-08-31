@@ -296,8 +296,22 @@ def read_data_excel(_fname):
     #          表示讀column名為name_00, name_01的行內容， "A, B, ...E:H"，表示讀column
     #          index為A, B, ...E到H行內容．
     # 
-    # nrows: 指定讀取row的列數, 例如nrows = 2表示2列內容，nrows = 13表示13列內容．
+    # nrows: 指定讀取row的列數, 例如nrows = 2表示0 - 1列內容，nrows = 13表示0 - 12列內容．
     # ---------------------------------------------------------------------------------
+
+    # ---------------------------------------------------------------------------------
+    # data format
+    #
+    #     col0  col1  col2  ... ...
+    # 0   value value value ... ...
+    # 1
+    # 2
+    # .
+    # .
+    # .
+    # N-1
+    # ---------------------------------------------------------------------------------
+
     data = pd.read_excel(_fname, sheet_name = "Joint Displacements")
     #data = pd.read_excel(_fname, sheet_name = "Joint Displacements", usecols = ["TABLE:  Joint Displacements"])
     #data = pd.read_excel(_fname, sheet_name = "Joint Displacements", usecols = "A, C, E:F", nrows = 2)
@@ -305,11 +319,12 @@ def read_data_excel(_fname):
     _df = pd.DataFrame(data)
     #print("show initial df:\n%s" % _df)
     
-    # 1. 抓取所有的行標題有哪些．
+    # 1.   抓取所有的行標題有哪些．
 
-    # 2. 計算所有行標題的數目．
+    # 2.   計算所有行標題的數目．
 
-    # 3. 抓取指定行標題，與指定列裡面的內容．
+    # 3.   抓取指定行標題，與指定列裡面的內容．
+    # 3-1. 抓取指定列裡面的內容．
 
     # 4. 修改指定行標題，與指定列裡面的內容．
     """
@@ -350,7 +365,7 @@ def read_data_excel(_fname):
     # 8. continue
     
 
-    print("show last df:\n%s" % _df)
+    print(">>> show _df:\n%s" % _df)
 
     #print("show data type:\n%s" % type(data))
     #print("show df type:\n%s" % type(df))
@@ -457,7 +472,13 @@ if __name__ == "__main__":
     #df_PP.get_col_nums()
     
     # 3. 抓取指定行標題，與指定列裡面的內容．
-    df_PP.get_col_row_data(0, 1)
+    #df_PP.get_col_row_data(0, 1)
+
+    # 3-1. 抓取某一列的值
+    #df_PP.get_row_data(0)
+
+    # 4. 修改指定行標題之指定列裡面的內容．
+    df_PP.modify_col_row_data(0, 1, "ggg")
 
     #write_data_excel(FILE_NAME_W_TO_EXCEL, df)
     #append_data_excel(FILE_NAME_W_TO_EXCEL, "NEW_SHEET", df)

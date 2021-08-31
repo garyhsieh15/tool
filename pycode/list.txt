@@ -17,3 +17,5 @@ $ date    folder    file    class    function    description
 20210808  --  20210125_RW_DATA.py  --  write_data_excel(_fname, _df)  可以寫新的sheet page到.xlsx檔，採用to_excel()，mode = 'w'。
 20210808  --  20210125_RW_DATA.py  --  append_data_excel(_fname, _sheet_name, _df)  可以加入新的sheet page到.xlsx檔，採用to_excel()，mode = 'a'。
 20210810  package  edit_excel_pandas.py  ExcelPandasOP()  --  可以用來對excel檔案操作的類別． 
+20210831  package  edit_excel_pandas.py  ExcelPandasOP()  get_row_data(self, _row)  可以用來抓取整列的內容． 
+20210831  package  edit_excel_pandas.py  ExcelPandasOP()  modify_col_row_data(self, _col, _row, _cont)  可以用來修改指定行下列的內容． 
