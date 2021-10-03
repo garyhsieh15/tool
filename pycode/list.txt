@@ -19,3 +19,5 @@ $ date    folder    file    class    function    description
 20210810  package  edit_excel_pandas.py  ExcelPandasOP()  --  可以用來對excel檔案操作的類別． 
 20210831  package  edit_excel_pandas.py  ExcelPandasOP()  get_row_data(self, _row)  可以用來抓取整列的內容． 
 20210831  package  edit_excel_pandas.py  ExcelPandasOP()  modify_col_row_data(self, _col, _row, _cont)  可以用來修改指定行下列的內容． 
+20211004  package  edit_excel_pandas.py  ExcelPandasOP()  get_idx_data(self, _idx)  可以用來抓取指定idx的idx． 
+20211004  package  edit_excel_pandas.py  ExcelPandasOP()  get_idx_idx(self)  可以用來抓取idx的總長度． 

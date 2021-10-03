@@ -1,5 +1,6 @@
 import csv
 import pandas as pd
+import openpyxl
 import os
 
 from package import edit_excel_pandas as eep
@@ -327,19 +328,10 @@ def read_data_excel(_fname):
     # 3-1. 抓取指定列裡面的內容．
 
     # 4. 修改指定行標題，與指定列裡面的內容．
-    """
-    _df[columns[0]][1] = "TABLEs"
-    a01_m = _df[columns[0]][1]
-    print("show a01_m: %s" % a01_m)
-    """
 
     # 5. 抓取列的index值與index的長度．
-    """
-    a00_idx = _df.index[0]
-    a01_idx = _df.index[1]
-    print("show a00_idx, a01_idx:%s, %s" % (a00_idx, a01_idx))
-    print("show len _df.index:%s" % len(_df.index))
-    """
+
+    # 5-1. 抓取列的index的長度．
 
     # 6. 顯示頭尾的資料．
     """
@@ -365,7 +357,7 @@ def read_data_excel(_fname):
     # 8. continue
     
 
-    print(">>> show _df:\n%s" % _df)
+    print(">>> show _df:\n%s" % (_df))
 
     #print("show data type:\n%s" % type(data))
     #print("show df type:\n%s" % type(df))
@@ -383,13 +375,14 @@ def write_data_excel(_fname, _df):
 
     # ---------------------------------------------------------------------------------
     # mode: 'w'表示重新寫檔案，不接續寫檔案．'a'表示接續寫檔案．
+    # engine: 指定要使用的引擎，openyxl 或 xlsxwriter，預設為xlsxwriter.
     # ---------------------------------------------------------------------------------
 
     # ---------------------------------------------------------------------------------
     # excel_writer: 檔案路徑．
     # sheet_name: 設定sheet的名稱．
     # na_rep: 設定NaN缺失值．
-    # columns[]: 指定要儲存的行資料．
+    # columns[]: 指定要儲存的行資料，若該行不存在，則發生錯誤．
     # index: 設定index是否要顯示，True為顯示，False為不顯示．
     # header: 設定行的標題是否要顯示或是重新給定標題，True為顯示，False為不顯示．["topic name"]重新給定標題．
     # index_label: 設定index的標題．
@@ -397,10 +390,10 @@ def write_data_excel(_fname, _df):
     # startcol: 從第幾行開始儲存資料．
     # freeze_panes = (a, b): 讓a列與b行在滑鼠滾動中固定．
     # ---------------------------------------------------------------------------------
-    with pd.ExcelWriter(_fname, mode = 'w') as writer:
+    with pd.ExcelWriter(_fname, mode = 'w', engine = "xlsxwriter") as writer:
         # 可以在這裡面重複執行df.to_excel()，即可以一次儲存多個sheet page．
-        _df.to_excel(excel_writer = writer, sheet_name = "JDisplacements", na_rep = 11, columns = ["R3_idx"], \
-        #_df.to_excel(excel_writer = writer, sheet_name = "NEW_JD", na_rep = 11, columns = ["R3_idx"], \
+        #_df.to_excel(excel_writer = writer, sheet_name = "JDisplacements", na_rep = 11, columns = ["R3_idx"], \
+        _df.to_excel(excel_writer = writer, sheet_name = "NEW_JD", na_rep = 11, columns = None, \
         index = True, header = True, index_label = "garyhsieh", startrow = 0, startcol = 0, float_format = "%.3f", \
         freeze_panes = (1, 1))
 
@@ -415,14 +408,21 @@ def append_data_excel(_fname, _sheet_name, _df):
     
     # ---------------------------------------------------------------------------------
     # mode: 'w'表示重新寫檔案，不接續寫檔案．'a'表示接續寫檔案．
+    # engine: 指定要使用的引擎，openyxl 或 xlsxwriter，預設為xlsxwriter.
     # ---------------------------------------------------------------------------------
-    with pd.ExcelWriter(_fname, mode = 'a') as writer:
+
+    # ---------------------------------------------------------------------------------
+    # excel_writer: 檔案路徑．
+    # ---------------------------------------------------------------------------------
+
+    with pd.ExcelWriter(_fname, mode = 'a', engine = "openpyxl") as writer:
+    #with pd.ExcelWriter(_fname, mode = 'a', engine = "xlsxwriter") as writer:
         sheet = writer.book
         if _sheet_name in sheet:
             sheet.remove(sheet[_sheet_name])
 
         # 可以在這裡面重複執行df.to_excel()，即可以一次儲存多個sheet page．
-        _df.to_excel(excel_writer = writer, sheet_name = _sheet_name, na_rep = "garyhsieh", columns = ["R3_idx"], \
+        _df.to_excel(excel_writer = writer, sheet_name = _sheet_name, na_rep = "garyhsieh", columns = ["gary"], \
                 index = True, header = True, index_label = "append", startrow = 1, startcol = 1)
 
     """
@@ -450,6 +450,7 @@ def append_data_excel(_fname, _sheet_name, _df):
 if __name__ == "__main__":
     path = os.getcwd()
     print(">>> show path: %s" % path)
+    print(">>> show fname: %s" % FILE_NAME_EXCEL)
     """
     t, up, ns, ew = read_acc_history(FILE_NAME)
     print("show time: ", t)
@@ -463,6 +464,7 @@ if __name__ == "__main__":
 
     #rw_data_csv_01(FILE_NAME_CSV)
     df = read_data_excel(FILE_NAME_EXCEL)
+    print(">>> show df: %s" % df)
     
     df_PP = eep.ExcelPandasOP(df)
     # 1. 抓取所有的行標題有哪些．
@@ -478,7 +480,13 @@ if __name__ == "__main__":
     #df_PP.get_row_data(0)
 
     # 4. 修改指定行標題之指定列裡面的內容．
-    df_PP.modify_col_row_data(0, 1, "ggg")
+    #df_PP.modify_col_row_data(0, 1, "engering")
+
+    # 5. 抓取指定列的index值．
+    #df_PP.get_idx_data(2)
+
+    # 5-1. 抓取列的長度．
+    df_PP.get_idx_len()
 
     #write_data_excel(FILE_NAME_W_TO_EXCEL, df)
     #append_data_excel(FILE_NAME_W_TO_EXCEL, "NEW_SHEET", df)

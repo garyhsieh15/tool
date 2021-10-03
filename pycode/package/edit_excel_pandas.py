@@ -39,10 +39,19 @@ class ExcelPandasOP:
 
     def modify_col_row_data(self, _col, _row, _cont):
         dc = self.df.columns
-        #self.df[dc[_col]] = _cont
-        self.df[dc[_col]][_row] = _cont
         print(">>> show dc[%d]: %s" % (_col, dc[_col]))
-        print(">>> show self.df[dc[%d]][%d]: %s" % (_col, _row, self.df[dc[_col]][_row]))
+        print(">>> show self.df[dc[%d]][%d]: %s" % (0, 0, self.df[dc[0]][0]))
+        print(">>> show self.df[dc[%d]][%d]: %s" % (0, 1, self.df[dc[0]][1]))
+        self.df[dc[_col]][_row] = _cont
+        print(">>> show after modify elf.df[dc[%d]][%d]: %s" % (_col, _row, self.df[dc[_col]][_row]))
+
+    def get_idx_data(self, _idx):
+        _idx_data = self.df.index[_idx]
+        print(">>> show idx_data[%d]: %s" % (_idx, _idx_data))
+    
+    def get_idx_len(self):
+        idx_len = len(self.df.index)
+        print(">>> show idx len: %s" % idx_len)
 
 if __name__ == "__main__":
     df_PP = ExcelPandasOP(df)
