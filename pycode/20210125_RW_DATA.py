@@ -486,7 +486,14 @@ if __name__ == "__main__":
     #df_PP.get_idx_data(2)
 
     # 5-1. 抓取列的長度．
-    df_PP.get_idx_len()
+    #df_PP.get_idx_len()
+
+    # 6. 顯示頭尾的資料．
+    #df_PP.get_head_tail_data()
+
+    # 7. 讀取指定列的資料並且抓取列裡面的cell值．
+    df_PP.get_cell_value()
+
 
     #write_data_excel(FILE_NAME_W_TO_EXCEL, df)
     #append_data_excel(FILE_NAME_W_TO_EXCEL, "NEW_SHEET", df)

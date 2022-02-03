@@ -25,6 +25,10 @@ class MyCalClass:
     def __calc_add1(self):
         print("__calc_add1")
 
+    def using_member_var(self):
+        print("show self.class_var:", self.class_var)
+        print("show self.calc_add2();", self.calc_add2())
+
 def show_me_the_money():
     print("enter show me the money")
 
@@ -44,5 +48,19 @@ if __name__ == "__main__":
     print("MyCalClass.class_var: ", MyCalClass.class_var)
     MyCalClass.class_var = 22
     print("MyCalClass.class_var: ", MyCalClass.class_var)
+    
+    print("-------------------------------------------")
+    print("instance_1.class_var: ", instance_1.class_var)
+    #instance_1.class_var = 33
+    #instance_2.class_var = 333
+    print("instance_1.class_var: ", instance_1.class_var)
+    print("instance_2.clsaa_var: ", instance_2.class_var)
 
+    print("-------------------------------------------")
+    MyCalClass.class_var = 555
+    print("instance_1.class_var: ", instance_1.class_var)
+    print("instance_2.clsaa_var: ", instance_2.class_var)
+    print("MyCalClass.class_var: ", MyCalClass.class_var)
 
+    print("-------------------------------------------")
+    instance_1.using_member_var()

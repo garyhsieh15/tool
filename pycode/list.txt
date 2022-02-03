@@ -21,3 +21,5 @@ $ date    folder    file    class    function    description
 20210831  package  edit_excel_pandas.py  ExcelPandasOP()  modify_col_row_data(self, _col, _row, _cont)  可以用來修改指定行下列的內容． 
 20211004  package  edit_excel_pandas.py  ExcelPandasOP()  get_idx_data(self, _idx)  可以用來抓取指定idx的idx． 
 20211004  package  edit_excel_pandas.py  ExcelPandasOP()  get_idx_idx(self)  可以用來抓取idx的總長度． 
+20220204  package  edit_excel_pandas.py  ExcelPandasOP()  get_head_tail_data(self)  可以用來抓取頭尾的資料． 
+20220204  package  edit_excel_pandas.py  ExcelPandasOP()  get_cell_value(self)  可以用來取得列的資料並且取得列裡面的cell資料． 

@@ -53,5 +53,23 @@ class ExcelPandasOP:
         idx_len = len(self.df.index)
         print(">>> show idx len: %s" % idx_len)
 
+    def get_head_tail_data(self):
+        print(">>> show head data: %s" % self.df.head(2))
+        print(">>> show tail data: %s" % self.df.tail(4))
+
+    def get_cell_value(self):
+        row_df_00 = self.df[0:3]
+        print("show df[0:3]:\n%s" % row_df_00)
+        row_df_01 = self.df[2:3]
+        print("show df[2:3]:\n%s" % row_df_01)
+
+        print(">>> show df[2:3]")
+        row_df_01_idx = row_df_01.index[0]
+        row_df_01_col = row_df_01.columns
+        print(">>> show row_df_01_idx: %s" % row_df_01_idx)
+        print(">>> show row_df_01_col: %s" % row_df_01_col)
+        for col in row_df_01_col:
+            print(">>> show row'col name: %30s, row'cell value: %14s" % (col, row_df_01[col][row_df_01_idx]))
+
 if __name__ == "__main__":
     df_PP = ExcelPandasOP(df)
