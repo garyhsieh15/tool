@@ -318,46 +318,8 @@ def read_data_excel(_fname):
     #data = pd.read_excel(_fname, sheet_name = "Joint Displacements", usecols = "A, C, E:F", nrows = 2)
     #data = pd.read_excel(_fname, sheet_name = None)
     _df = pd.DataFrame(data)
-    #print("show initial df:\n%s" % _df)
-    
-    # 1.   抓取所有的行標題有哪些．
 
-    # 2.   計算所有行標題的數目．
-
-    # 3.   抓取指定行標題，與指定列裡面的內容．
-    # 3-1. 抓取指定列裡面的內容．
-
-    # 4. 修改指定行標題，與指定列裡面的內容．
-
-    # 5. 抓取列的index值與index的長度．
-
-    # 5-1. 抓取列的index的長度．
-
-    # 6. 顯示頭尾的資料．
-    """
-    _df_head = _df.head(2)
-    _df_tail = _df.tail(4)
-    print("show df.head(2):\n%s" % _df_head)
-    print("show df.tail(4):\n%s" % _df_tail)
-    """
-
-    # 7. 讀取指定列的資料並且抓取列裡面的cell值．
-    """
-    row_df_00 = _df[0:3]
-    print("show df[0:3]:\n%s" % row_df_00)
-    row_df_01 = _df[2:3]
-    print("show df[2:3]:\n%s" % row_df_01)
-
-    row_df_01_idx = row_df_01.index[0]
-    row_df_01_col = row_df_01.columns
-    for col in row_df_01_col:
-        print("show row'col: %30s, row'cell: %14s" % (col, row_df_01[col][row_df_01_idx]))
-    """
-
-    # 8. continue
-    
-
-    print(">>> show _df:\n%s" % (_df))
+    #print(">>> show _df:\n%s" % (_df))
 
     #print("show data type:\n%s" % type(data))
     #print("show df type:\n%s" % type(df))
@@ -492,7 +454,7 @@ if __name__ == "__main__":
     #df_PP.get_head_tail_data()
 
     # 7. 讀取指定列的資料並且抓取列裡面的cell值．
-    df_PP.get_cell_value()
+    df_PP.get_cell_value(2, 3, 0)
 
 
     #write_data_excel(FILE_NAME_W_TO_EXCEL, df)
