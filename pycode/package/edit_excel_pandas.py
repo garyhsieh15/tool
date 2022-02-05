@@ -30,11 +30,22 @@ class ExcelPandasOP:
         print(">>> show columns[0]: %s" % columns[0])
         print(">>> show columns[1]: %s" % columns[1])
 
+    def get_info_df(self):
+        self.df.info()
+
+    def show_NaN_status(self):
+        NaN_status = self.df.isnull()
+        print(">>> show NaN status: %s" % NaN_status)
+
     # 得到總共有幾的column idx 
     def get_col_nums(self):
         columns = self.df.columns
         num_columns = len(columns)
         print(">>> show num of columns: %d" % num_columns)
+
+    def get_row_col_size(self):
+        row_col_shape = self.df.shape
+        print(">>> show row x col shape: %s x %s" % row_col_shape)
 
     # 針對每個column去取得值，由指定的column上到下去取得值．
     def get_col_row_data(self, _col, _row):
@@ -86,6 +97,11 @@ class ExcelPandasOP:
         print(" -----------------------------------------------------------------------------------------------------------")
         for col in col_df_idx:
             print(">>> show col idx: %14s, row idx %4s value: %14s" % (col, row_range_df_idx, row_range_df[col][row_range_df_idx]))
+
+    # 刪除NaN的列．
+    def del_NaN_row(self):
+        df_dropna_result = self.df.dropna()
+        print(">>> show df dropna result:\n%s" % df_dropna_result)
 
 if __name__ == "__main__":
     df_PP = ExcelPandasOP(df)

@@ -426,15 +426,24 @@ if __name__ == "__main__":
 
     #rw_data_csv_01(FILE_NAME_CSV)
     df = read_data_excel(FILE_NAME_EXCEL)
-    print(">>> show df: %s" % df)
+    print(">>> show df: \n%s" % df)
     
     df_PP = eep.ExcelPandasOP(df)
     # 1. 抓取所有的行標題有哪些．
-    #df_PP.get_col_header()
+    df_PP.get_col_header()
+ 
+    # 1-1. 抓到df的info.
+    #df_PP.get_info_df()
+
+    # 1-2. 顯示NaN的值，用true或是false表示．
+    #df_PP.show_NaN_status()
 
     # 2. 計算所有行標題的數目．
     #df_PP.get_col_nums()
     
+    # 2-1. 取得col x row的大小．
+    #df_PP.get_row_col_size()
+
     # 3. 抓取指定行標題，與指定列裡面的內容．
     #df_PP.get_col_row_data(0, 1)
 
@@ -454,8 +463,10 @@ if __name__ == "__main__":
     #df_PP.get_head_tail_data()
 
     # 7. 讀取指定列的資料並且抓取列裡面的cell值．
-    df_PP.get_cell_value(2, 3, 0)
+    #df_PP.get_cell_value(2, 3, 0)
 
+    # 8. 刪除有NaN的列．
+    #df_PP.del_NaN_row()
 
     #write_data_excel(FILE_NAME_W_TO_EXCEL, df)
     #append_data_excel(FILE_NAME_W_TO_EXCEL, "NEW_SHEET", df)
