@@ -430,7 +430,7 @@ if __name__ == "__main__":
     
     df_PP = eep.ExcelPandasOP(df)
     # 1. 抓取所有的行標題有哪些．
-    df_PP.get_col_header()
+    #df_PP.get_col_header()
  
     # 1-1. 抓到df的info.
     #df_PP.get_info_df()
@@ -467,6 +467,12 @@ if __name__ == "__main__":
 
     # 8. 刪除有NaN的列．
     #df_PP.del_NaN_row()
+
+    # 9. 填入NaN裡面的所有值．
+    #df_PP.fill_in_all_NaN(123)
+
+    # 10. 填入指定col裡面NaN的值
+    df_PP.fill_in_col_NaN("gary01", 333)
 
     #write_data_excel(FILE_NAME_W_TO_EXCEL, df)
     #append_data_excel(FILE_NAME_W_TO_EXCEL, "NEW_SHEET", df)

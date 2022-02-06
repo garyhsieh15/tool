@@ -103,5 +103,15 @@ class ExcelPandasOP:
         df_dropna_result = self.df.dropna()
         print(">>> show df dropna result:\n%s" % df_dropna_result)
 
+    # 填入NaN裡的所有指定值
+    def fill_in_all_NaN(self, _value):
+        after_modifying = self.df.fillna(_value)
+        print(">>> show after_modifying: \n%s" % after_modifying)
+
+    # 填入指定行的NaN值
+    def fill_in_col_NaN(self, _col, _value):
+        after_modifying = self.df.fillna({_col: _value})
+        print(">>> show after_modifying: \n%s" % after_modifying)
+
 if __name__ == "__main__":
     df_PP = ExcelPandasOP(df)

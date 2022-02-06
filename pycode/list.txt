@@ -24,3 +24,5 @@ $ date    folder    file    class    function    description
 20220204  package  edit_excel_pandas.py  ExcelPandasOP()  get_head_tail_data(self)  可以用來抓取頭尾的資料． 
 20220204  package  edit_excel_pandas.py  ExcelPandasOP()  get_cell_value(self)  可以用來取得列的資料並且取得列裡面的cell資料． 
 20220205  package  edit_excel_pandas.py  ExcelPandasOP()  get_Nan_status(self)  可以用來取得NaN值的狀況，若是NaN則顯示True． 
+20220206  package  edit_excel_pandas.py  ExcelPandasOP()  fill_in_all_NaN(self, _value)  可以用來將NaN的值全部填入指定的值． 
+20220206  package  edit_excel_pandas.py  ExcelPandasOP()  fill_in_col_NaN(self,_col,  _value)  可以用來將指定的行裡面的NaN的值，全部填入指定的值． 
