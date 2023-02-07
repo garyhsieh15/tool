@@ -32,7 +32,7 @@ class MyCalClass:
 def show_me_the_money():
     print("enter show me the money")
 
-class_ex_a = 11
+class_ex_a = 16
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 
 
 class MyCalClass:
-    class_var = 11
+    class_var = 15
 
     def __init__(self, x1, y1):
         self.x = x1
